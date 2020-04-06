@@ -9,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
     hooks: {
       beforeCreate: (instance,option) => {
         let salt = bcrypt.genSaltSync(8)
-        let hash = bcrypt.hashSynch(instance.password, salt)
+        let hash = bcrypt.hashSync(instance.password, salt)
         instance.password = hash
       }
-    }
+    },sequelize
   });
   User.associate = function(models) {
     // associations can be defined here
