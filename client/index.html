@@ -61,7 +61,7 @@
 </head>
 
 <body class="background">
-
+    <div id="errMessage"></div>
     <!-- Login -->
     <div id="divLogin" class="container my-3">
         <div class="row">
@@ -194,6 +194,9 @@
                         getFood()
                         $('#divLogin').hide()
                         $('#divUtama').show()
+                    },
+                    error: function (err) {
+                        $('#errMessage').html(`<div class="alert alert-danger" role="alert"> Sign In Failed </div>`)
                     }
                 })
 
@@ -213,7 +216,7 @@
                     headers: { access_token: localStorage.getItem('access_token') },
                     success: function (data) {
                         getFood()
-                    }
+                    },
                 })
 
             })
@@ -234,7 +237,7 @@
 
             $.ajax({
                 url: `http://localhost:3000/foods/${idhapus}`,
-                type: 'delete',
+                type: 'DELETE',
                 headers: { access_token: localStorage.getItem('access_token') },
                 success: function (data) {
                     getFood()
@@ -268,9 +271,9 @@
                                     <div class="col-3 d-flex align-items-baseline">
                                          <i class="fas fa-tag text-grey mr-2"></i>
                                          <p class="text-grey">${element.tag}</p>
-                                <button onlick="deleteFood(${element.id})" class="fas fa-trash text-danger ml-auto cursor-pointer"></button>
-                                </div>
-                            </div>
+                                        <button onclick="deleteFood(${element.id})" class="fas fa-trash text-danger ml-auto cursor-pointer"></button>
+                                    </div>
+                                 </div>
                             <div class="card-body border-bottom">
                             ${element.ingredients}
                             </div>
